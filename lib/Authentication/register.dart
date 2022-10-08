@@ -30,9 +30,11 @@ class RegisterPageContent extends StatefulWidget {
 
 class _RegisterPageContentState extends State<RegisterPageContent> {
 
-  TextEditingController textNameController=TextEditingController();
+  TextEditingController textEmail=TextEditingController();
   TextEditingController textPasswordController=TextEditingController();
   TextEditingController textPhoneController=TextEditingController();
+  TextEditingController textname=TextEditingController();
+  TextEditingController textcity=TextEditingController();
   
   final _formKey = GlobalKey<FormState>();
 
@@ -40,12 +42,14 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Container(
-        color: UniversalVariables.whiteColor,
-        padding: EdgeInsets.only(top: 20.0,left: 20.0,right: 20.0),
-        child: Form(
-          key: _formKey,
-          child: buildForm(),
+      body: SingleChildScrollView(
+        child: Container(
+          color: UniversalVariables.whiteColor,
+          padding: EdgeInsets.only(top: 20.0,left: 20.0,right: 20.0),
+          child: Form(
+            key: _formKey,
+            child: buildForm(),
+          ),
         ),
       ),
     );
@@ -55,43 +59,87 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
     return Column(
       children:[
         SizedBox(height:20.0),
-        FlutterLogo(size: 200.0,),
-        SizedBox(height:20.0),
-        TextFormField(
-
-          controller: textNameController,
-          decoration: InputDecoration(
-              hintText: "Email"
+        Hero(
+          tag: 'hero',
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 100.0,
+            child: Image.network("https://img.freepik.com/free-vector/detailed-travel-logo_23-2148616611.jpg?w=2000"),
           ),
         ),
+        SizedBox(height:20.0),
+        TextFormField(
+          controller: textname,
+          decoration: InputDecoration(
+            hintText: 'Name',
+            prefixIcon: Icon(Icons.email),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+          ),
+        ),
+        SizedBox(height: 10,),
+        TextFormField(
+          controller: textEmail,
+          decoration: InputDecoration(
+            hintText: 'Email',
+            prefixIcon: Icon(Icons.email),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+          ),
+        ),
+        SizedBox(height: 10,),
         TextFormField(
           maxLength: 10,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.digitsOnly,
           ],
-          keyboardType: TextInputType.number,
           controller: textPhoneController,
           decoration: InputDecoration(
-              hintText: "PhoneNo"
+            hintText: 'Phone',
+            prefixIcon: Icon(Icons.phone),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
           ),
         ),
+        SizedBox(height: 10,),
         TextFormField(
-
+          controller: textcity,
+          decoration: InputDecoration(
+            hintText: 'City',
+            prefixIcon: Icon(Icons.email),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+          ),
+        ),
+        SizedBox(height: 10,),
+        TextFormField(
           controller: textPasswordController,
           decoration: InputDecoration(
-              hintText: "Password"
+            hintText: 'Password',
+            prefixIcon: Icon(Icons.email),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
           ),
         ),
-        SizedBox(height:20.0),
-        TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(UniversalVariables.orangeColor),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),)
-            ),
-          ),
-          onPressed: () {},
-          child: Text("Register",style:TextStyle(color:UniversalVariables.whiteColor,)),
+        SizedBox(
+          height: 10,
         ),
+        SizedBox(
+          width: double.infinity,
+          child: TextButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(UniversalVariables.orangeColor),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),)
+              ),),
+            onPressed: (){
+
+              Register();
+            },
+            child: Text("Register",style:TextStyle(color: UniversalVariables.whiteColor,fontSize: 24)),
+          ) ,
+        ),
+        TextButton.icon(onPressed:(){gotoLoginPage();}, icon: Icon(Icons.person_add), label: Text("Already Login ? Click Here..",style:TextStyle(color: Colors.black45, fontWeight: FontWeight.bold)),)
       ],
     );
   }
@@ -99,7 +147,9 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
   gotoLoginPage() {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPageContent()));
   }
-  
+  Register(){
+
+  }
   gotoHomePage() {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePageContent()));
   }

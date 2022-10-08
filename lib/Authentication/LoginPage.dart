@@ -15,6 +15,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:user_tourist/Authentication/register.dart';
 
 import '../utils/universal_variables.dart';
 
@@ -54,7 +55,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
           child: CircleAvatar(
             backgroundColor: Colors.transparent,
             radius: 100.0,
-            child: Image.asset('assets/logo.jpg'),
+            child: Image.network("https://img.freepik.com/free-vector/detailed-travel-logo_23-2148616611.jpg?w=2000"),
           ),
         ),
         SizedBox(height:20.0),
@@ -93,7 +94,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
             child: Text("Login",style:TextStyle(color: UniversalVariables.whiteColor,fontSize: 24)),
           ) ,
         ),
-        TextButton.icon(onPressed:()=> gotoRegisterPage(), icon: Icon(Icons.person_add), label: Text("New User ? Click Here..",style:TextStyle(color: Colors.black45, fontWeight: FontWeight.bold)),)
+        TextButton.icon(onPressed:(){gotoRegisterPage();}, icon: Icon(Icons.person_add), label: Text("New User ? Click Here..",style:TextStyle(color: Colors.black45, fontWeight: FontWeight.bold)),)
       ],
     );
   }
@@ -103,6 +104,6 @@ class _LoginPageContentState extends State<LoginPageContent> {
   }
 
   gotoRegisterPage() {
-   // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> RegisterPage()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> RegisterPageContent()));
   }
 }
