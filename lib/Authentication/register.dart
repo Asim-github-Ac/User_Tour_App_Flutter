@@ -14,6 +14,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:user_tourist/DashBoard/homepage.dart';
@@ -36,7 +37,25 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
   TextEditingController textname=TextEditingController();
   TextEditingController textcity=TextEditingController();
   
-  final _formKey = GlobalKey<FormState>();
+ Future<void> SignUp() async {
+   try {
+     final userCredential =
+         await FirebaseAuth.instance.createUserWithEmailAndPassword(email:textEmail.text,password:textPasswordController.text);
+     gotoHomePage();
+   } on FirebaseAuthException catch (e) {
+     switch (e.code) {
+       case "invalid-custom-token":
+         print("The supplied token is not a Firebase custom auth token.");
+         break;
+       case "custom-token-mismatch":
+         print("The supplied token is for a different Firebase project.");
+         break;
+       default:
+         print("Unkown error.");
+     }
+   }
+ }
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +66,6 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
           color: UniversalVariables.whiteColor,
           padding: EdgeInsets.only(top: 20.0,left: 20.0,right: 20.0),
           child: Form(
-            key: _formKey,
             child: buildForm(),
           ),
         ),
@@ -134,7 +152,7 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
               ),),
             onPressed: (){
 
-              Register();
+              SignUp();
             },
             child: Text("Register",style:TextStyle(color: UniversalVariables.whiteColor,fontSize: 24)),
           ) ,
@@ -147,9 +165,7 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
   gotoLoginPage() {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPageContent()));
   }
-  Register(){
 
-  }
   gotoHomePage() {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePageContent()));
   }

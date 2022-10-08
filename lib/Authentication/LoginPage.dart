@@ -14,8 +14,10 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_tourist/Authentication/register.dart';
+import 'package:user_tourist/DashBoard/homepage.dart';
 
 import '../utils/universal_variables.dart';
 
@@ -29,7 +31,25 @@ class _LoginPageContentState extends State<LoginPageContent> {
 
   TextEditingController textNameController=TextEditingController();
   TextEditingController textPasswordController=TextEditingController();
-
+  Future<void> LoginNow() async {
+    try {
+      final userCredential =
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email:textNameController.text,password:textPasswordController.text);
+      gotoHomePage();
+    } on FirebaseAuthException catch (e) {
+      print('error__________________'+e.code);
+      switch (e.code) {
+        case "invalid-custom-token":
+          print("The supplied token is not a Firebase custom auth token.");
+          break;
+        case "custom-token-mismatch":
+          print("The supplied token is for a different Firebase project.");
+          break;
+        default:
+          print("Unkown error.");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +110,9 @@ class _LoginPageContentState extends State<LoginPageContent> {
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),)
               ),),
-            onPressed: (){},
+            onPressed: (){
+              LoginNow();
+            },
             child: Text("Login",style:TextStyle(color: UniversalVariables.whiteColor,fontSize: 24)),
           ) ,
         ),
@@ -100,7 +122,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
   }
 
   gotoHomePage() {
-  //  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePageContent()));
   }
 
   gotoRegisterPage() {

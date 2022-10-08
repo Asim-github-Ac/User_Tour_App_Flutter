@@ -2,8 +2,10 @@
     package="com.example.user_tourist">
    <application
         android:label="user_tourist"
-        android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:name="Tourist App"
+        android:icon="@mipmap/ic_launcher"
+       android:usesCleartextTraffic="true"
+       >
         <activity
             android:name=".MainActivity"
             android:exported="true"
