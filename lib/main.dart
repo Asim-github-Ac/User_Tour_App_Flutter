@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:user_tourist/Authentication/LoginPage.dart';
 import 'package:user_tourist/Authentication/SplashScreen.dart';
+import 'package:user_tourist/DashBoard/DashHome.dart';
+import 'package:user_tourist/DashBoard/homepage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:  SplashScreen(),
+      home:  DashHome(),
     );
   }
 }
