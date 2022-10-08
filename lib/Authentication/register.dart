@@ -14,6 +14,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,18 +43,30 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
      final userCredential =
          await FirebaseAuth.instance.createUserWithEmailAndPassword(email:textEmail.text,password:textPasswordController.text);
      gotoHomePage();
+     SnakBar("Success");
    } on FirebaseAuthException catch (e) {
-     switch (e.code) {
-       case "invalid-custom-token":
-         print("The supplied token is not a Firebase custom auth token.");
+     print('errooorr___________________________'+e.code);
+      switch (e.code) {
+       case "invalid-email":
+         SnakBar("Invalid Email");
          break;
-       case "custom-token-mismatch":
-         print("The supplied token is for a different Firebase project.");
+       case "email-already-in-use":
+         SnakBar("Already Register");
          break;
+        case "weak-password":
+          SnakBar("Weak password");
+          break;
        default:
          print("Unkown error.");
      }
    }
+ }
+ void SnakBar(String message){
+   ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+         content: Text(message),
+       )
+   );
  }
 
 
@@ -166,7 +179,18 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPageContent()));
   }
 
-  gotoHomePage() {
+  Future<void> gotoHomePage() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+      // Call the user's CollectionReference to add a new user
+    users.add({
+        'full_name': textname.text.toString(), // John Doe
+        'email': textEmail.text.toString(), // Stokes and Sons
+        'phone': textPhoneController.text.toString(),
+        'city': textcity.text.toString()// 42
+      })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
     Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePageContent()));
-  }
+    }
 }

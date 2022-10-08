@@ -35,11 +35,14 @@ class _LoginPageContentState extends State<LoginPageContent> {
     try {
       final userCredential =
       await FirebaseAuth.instance.signInWithEmailAndPassword(email:textNameController.text,password:textPasswordController.text);
+      SnakBar("Successfully Login");
       gotoHomePage();
+
     } on FirebaseAuthException catch (e) {
       print('error__________________'+e.code);
+      SnakBar(e.code);
       switch (e.code) {
-        case "invalid-custom-token":
+        case "wrong-password":
           print("The supplied token is not a Firebase custom auth token.");
           break;
         case "custom-token-mismatch":
@@ -50,16 +53,24 @@ class _LoginPageContentState extends State<LoginPageContent> {
       }
     }
   }
-
+  void SnakBar(String message){
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        )
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: UniversalVariables.whiteColor,
-        padding: EdgeInsets.only(top: 20.0,left: 20.0,right: 20.0),
-        child: Form(
+      body: SingleChildScrollView(
+        child: Container(
+          color: UniversalVariables.whiteColor,
+          padding: EdgeInsets.only(top: 20.0,left: 20.0,right: 20.0),
+          child: Form(
 
-          child: buildForm(),
+            child: buildForm(),
+          ),
         ),
       ),
     );
