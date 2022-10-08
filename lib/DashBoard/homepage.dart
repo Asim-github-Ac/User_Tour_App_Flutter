@@ -33,31 +33,7 @@ class _HomePageContentState extends State<HomePageContent> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(length: 3,
-          child: Scaffold(
-            drawer: createDrawer(),
-            appBar: AppBar(
-              bottom: TabBar(
-                tabs: [
-                  Tab(icon: Icon(Icons.home), text: "Tab 1"),
-                  Tab(icon: Icon(Icons.add_shopping_cart), text: "Tab 2"),
-                  Tab(icon: Icon(Icons.reorder), text: "Tab 2")
-                ],
-              ),
-            ),
-        body: TabBarView(
-          children: [
-            HomePageContent(),
-            CartPage(),
-            MyOrderPage(),
-          ],
-        ),
-      ),
-      ),
-    );
-
-
+          return Scaffold();
   }
   createDrawer(){
     return Drawer(
