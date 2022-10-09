@@ -18,6 +18,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:user_tourist/DashBoard/DashHome.dart';
 import 'package:user_tourist/DashBoard/homepage.dart';
 
 import '../utils/universal_variables.dart';
@@ -147,7 +148,7 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
           controller: textPasswordController,
           decoration: InputDecoration(
             hintText: 'Password',
-            prefixIcon: Icon(Icons.email),
+            prefixIcon: Icon(Icons.password),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
           ),
@@ -191,6 +192,6 @@ class _RegisterPageContentState extends State<RegisterPageContent> {
       })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePageContent()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
     }
 }

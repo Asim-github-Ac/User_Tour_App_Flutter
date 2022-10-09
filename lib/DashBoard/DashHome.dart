@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:user_tourist/DashBoard/CartPage.dart';
 import 'package:user_tourist/DashBoard/MyOrderPage.dart';
 import 'package:user_tourist/DashBoard/homepage.dart';
+import 'package:user_tourist/utils/universal_variables.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -25,16 +26,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffC4DFCB),
+      backgroundColor:  UniversalVariables.whiteColor,
       appBar: AppBar(
         leading: Icon(
           Icons.menu,
-          color: Theme.of(context).primaryColor,
+          color: UniversalVariables.orangeColor,
         ),
         title: Text(
-          "Tour App",
+          "Tourist App",
           style: TextStyle(
-            color: Theme.of(context).primaryColor,
+            color:  UniversalVariables.orangeColor,
             fontSize: 25,
             fontWeight: FontWeight.w600,
           ),
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       height: 60,
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: UniversalVariables.orangeColor,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
@@ -88,12 +89,12 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: pageIndex == 1
                 ? const Icon(
-              Icons.work_rounded,
+              Icons.shopping_cart,
               color: Colors.white,
               size: 35,
             )
                 : const Icon(
-              Icons.work_outline_outlined,
+              Icons.add_shopping_cart,
               color: Colors.white,
               size: 35,
             ),
@@ -107,12 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: pageIndex == 2
                 ? const Icon(
-              Icons.widgets_rounded,
+              Icons.reorder,
               color: Colors.white,
               size: 35,
             )
                 : const Icon(
-              Icons.widgets_outlined,
+              Icons.reorder,
               color: Colors.white,
               size: 35,
             ),

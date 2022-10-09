@@ -17,6 +17,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_tourist/Authentication/register.dart';
+import 'package:user_tourist/DashBoard/DashHome.dart';
 import 'package:user_tourist/DashBoard/homepage.dart';
 
 import '../utils/universal_variables.dart';
@@ -133,7 +134,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
   }
 
   gotoHomePage() {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePageContent()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
   }
 
   gotoRegisterPage() {
