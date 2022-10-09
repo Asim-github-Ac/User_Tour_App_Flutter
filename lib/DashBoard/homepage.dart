@@ -19,6 +19,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:user_tourist/DashBoard/DetailsTours.dart';
 import 'package:user_tourist/utils/universal_variables.dart';
 
 import 'CartPage.dart';
@@ -48,7 +49,6 @@ class _HomePageContentState extends State<HomePageContent> {
         }
 
         return Scaffold(
-          appBar: AppBar(title: Text("Tours List"),),
           body: ListView(
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
               Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
@@ -71,6 +71,22 @@ class _HomePageContentState extends State<HomePageContent> {
                       Row(children: [Text("Place Des: ",style: TextStyle(color: Colors.blue,fontSize: 18),),Text(data['desplace'])],),
                       Row(children: [Text("Place Date: ",style: TextStyle(color: Colors.blue,fontSize: 18),),Text(data['date'])],),
                       Row(children: [Text("Place Stay: ",style: TextStyle(color: Colors.blue,fontSize: 18),),Text(data['stay'])],),
+                      new SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary:Color(0xff0EA89C),
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          maximumSize: const Size(200, 45),
+                          minimumSize: const Size(200, 45),
+                        ),
+                        child: const Text("More Details"),
+                        onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsTours(url:data['url'],place: data['placename'],desplace: data['desplace'],expense: data['expense'],date: data['date'],stay: data['stay'],city: data['city'],)));},
+                      ),
+                      SizedBox(height: 10,)
                     ],
                   ),
                 ),
