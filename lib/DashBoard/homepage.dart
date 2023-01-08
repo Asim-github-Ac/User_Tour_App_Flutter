@@ -39,7 +39,9 @@ class _HomePageContentState extends State<HomePageContent> {
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('Tours').where("placename",isGreaterThanOrEqualTo: name.toString()).snapshots();
     return Scaffold(
 
-                appBar: AppBar(title: Card(
+                appBar: AppBar(
+                  backgroundColor:UniversalVariables.orangeColor,
+                  title: Card(
                 child: TextField(
                 decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
@@ -91,7 +93,7 @@ class _HomePageContentState extends State<HomePageContent> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary:Color(0xff0EA89C),
+                            primary:UniversalVariables.orangeColor,
                             shape: new RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
